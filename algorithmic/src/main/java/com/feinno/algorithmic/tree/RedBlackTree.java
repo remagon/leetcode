@@ -113,6 +113,9 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 	
 	/**
 	 * 删除key所在node
+	 * 如果节点不是子节点，需要确定后补节点
+	 * 1. 如果只有一个孩子节点，直接提上孩子节点
+	 * 2. 如果没有孩子节点，找到后继节点，将后继节点的值替换到删除节点，然后删除后继几点
 	 * @param key
 	 */
 	public V delete(K key) {
@@ -387,17 +390,19 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 			rb.insert(key, 1);
 			keys.add(key);
 			if (rb.checkBalance() == false) {
+				for (int k : keys) {
+					System.out.println("insert:" + k);
+				}
 				throw new Exception("error");
-			} else {
-				System.out.println("good:" + key);
 			}
 		}
 		for (int key : keys) {
 			rb.delete(key);
 			if (rb.checkBalance() == false) {
+				for (int k : keys) {
+					System.out.println("insert:" + k);
+				}
 				throw new Exception("error" + key);
-			} else {
-				//System.out.println("good");
 			}
 		}
 	}
